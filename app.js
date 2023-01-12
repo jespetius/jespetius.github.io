@@ -15,10 +15,10 @@ let person = {
     loan: 100,
     workBalance: 100,
 };
-personElement.innerHTML = person.name;
-bankBalanceElement.innerHTML ="Balance "  + person.bankBalance + " €";
+personElement.innerText = person.name;
+bankBalanceElement.innerText ="Balance "  + person.bankBalance + " €";
 loanBalanceElement.innerText = person.loan;
-workBalanceElement.innerHTML ="Balance "  + person.workBalance + " €";
+workBalanceElement.innerText ="Balance "  + person.workBalance + " €";
 
 //onclick loan
 document.getElementById("loanButton").addEventListener("click", pressloanButton);
@@ -27,8 +27,13 @@ function pressloanButton(){
         alert("You alreydy have loan. Please pay it first before applying new loan!")
     } else {
         let loanAsked = prompt("Your current Balance is " + person.bankBalance + "€. We allow you to loan " + 2*person.bankBalance  +"€. Write the wanted loan amount.", 2*person.bankBalance );
-        if (loanAsked ===0){
+        if (loanAsked === 0){
             alert("Asked loan was "  + loanAsked + "€. Loan not granted")
+        }
+        else if (loanAsked <= person.bankBalance*2 && loanAsked > 0){
+            alert("Loan Granted")
+            person.loan = loanAsked;
+            loanBalanceElement.innerText = person.loan;       
         }
     }
 }
@@ -70,7 +75,7 @@ document.getElementById("workButton").addEventListener("click", pressWork);
 function pressWork() {
     person.workBalance = person.workBalance + 100
     console.log(person.workBalance)
-    workBalanceElement.innerHTML ="Balance "  + person.workBalance + " €";
+    workBalanceElement.innerText ="Balance "  + person.workBalance + " €";
   }
 
 
