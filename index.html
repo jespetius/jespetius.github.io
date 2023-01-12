@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Komputer Store</title>
 </head>
 <body>
-      <h1>Komputer Store</h1>
-      
+    <div class="header">  
+    <h1>Komputer Store</h1>
+    </div>  
       <div class="bank">
         <h2 name="person" id="person"></h2>
-        <p>Balance  <p name="bankBalance" id="bankBalance"></p> €</p>
-        <button name="loanButton" id="loanButton">GET LOAN</button>
+        <p name="bankBalance" id="bankBalance"></p>
+        <p name="loanBalance" id="loanBalance"></p>
+        <button name="loanButton" id="loanButton">Get a Loan</button>
 
 
       </div>
-
+      <div class="upper-part">
       <div class="work">
         <h2>Work</h2>
-        <p>Pay: 0 Kr</p>
+        <p name="workMoney" id="workMoney"></p>
         <button name="bankButton" id="bankButton">Bank</button>
         <button name="workButton" id="workButton">Work</button>
       </div>
@@ -29,8 +32,14 @@
         <select name="laptops" id="laptops">
            
         </select>
-        <p>specs</p>
+        <ul id="specs" name="specs">
+
+        
+            
+        </ul>
       </div>
+
+    </div>
 
       <div class="buyNowView">
         <p>Name</p>

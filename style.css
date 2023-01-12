@@ -1,0 +1,35 @@
+.header {
+    background-color: black;
+    font-variant-caps: all-petite-caps;
+    color: white;
+}
+
+.upper-part {
+    display: flex;
+}
+
+.bank {
+    float: left;
+    display: inline-block;
+    background-color: lightgray;
+    margin: 15px;
+
+    
+}
+
+.work {
+    float: left;
+    display: inline-block;
+    background-color: azure;
+    margin: 15px;
+}
+
+.laptopsView {
+    float: left;
+    background-color: blanchedalmond;
+    margin: 15px;
+}
+
+.buyNowView {
+    background-color: cornsilk;
+}
