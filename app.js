@@ -21,7 +21,7 @@ let person = {
     loan: 0,
     workBalance: 0,
 };
-
+//functions to refresh Balances
 function refreshLoanBalance(){
     loanBalanceElement.innerText ="Loan " + person.loan + " €";  
 }
@@ -30,6 +30,10 @@ function refreshWorkBalance(){
 }
 function refreshBankBalance(){
     bankBalanceElement.innerText ="Balance "  + person.bankBalance + " €";
+}
+function hideLoanInfo(){
+    document.getElementById('loanBalance').style.display = "none";
+        document.getElementById("payLoanButton").style.display = "none";
 }
 //basic info showing 
 personElement.innerText = person.name;
@@ -73,8 +77,7 @@ function pressBankButton() {
     }else if (person.loan === 0){
     person.bankBalance = person.bankBalance + person.workBalance
     person.workBalance = 0
-    console.log(person.bankBalance)
-    bankBalanceElement.innerText ="Balance "  + person.bankBalance + " €";
+    refreshBankBalance();
     refreshWorkBalance();
     document.getElementById('loanBalance').style.display = "hidden";
 }else if (person.loan >0){
@@ -88,17 +91,15 @@ function pressBankButton() {
         person.bankBalance = person.bankBalance + overpaidMoney
         person.loan = 0
         alert("Hurray, you have paid your loan to bank!")
-        document.getElementById('loanBalance').style.display = "none";
-        document.getElementById("payLoanButton").style.display = "none";
-
+        //hiding loan balance and Pay loan button
+        hideLoanInfo();
     }
     refreshBankBalance();
     refreshWorkBalance();
     
-
+//if loan went to negative, shouldnt happen
 }else if (person.loan <0)
-    loanBalanceElement.innerText = "BANK OWNS MONEY TO YOU";
-    
+    loanBalanceElement.innerText = "BANK OWNS MONEY TO YOU";    
 }
 
 
@@ -106,12 +107,10 @@ function pressBankButton() {
 document.getElementById("workButton").addEventListener("click", pressWork);
 function pressWork() {
     person.workBalance += 100
-    console.log(person.workBalance)
     refreshWorkBalance();
   }
 
 //Pay Loan directly
-
 document.getElementById("payLoanButton").addEventListener("click", pressPayLoan);
 function pressPayLoan(){
     if (person.workBalance === 0){
@@ -123,13 +122,11 @@ function pressPayLoan(){
         person.workBalance = 0 
         refreshLoanBalance();
         if (person.loan === 0){
-            document.getElementById('loanBalance').style.display = "none";
-            document.getElementById("payLoanButton").style.display = "none";
+            hideLoanInfo();
         }
     }
     
-    checkLoanBalance()
-
+    checkLoanBalance();
     refreshBankBalance();
     refreshWorkBalance();
 }
@@ -140,13 +137,13 @@ function checkLoanBalance(){
         person.bankBalance = person.bankBalance + overpaidMoney
         person.loan = 0
         alert("Hurray, you have paid your loan to bank!")
-        document.getElementById('loanBalance').style.display = "none";
-        document.getElementById("payLoanButton").style.display = "none";
+        hideLoanInfo();
 }
 }
 
-
+//listener for buynow button
 document.getElementById("BuyNowButton").addEventListener("click", confirmPurchase);
+//Purchase prosess
 function pressBuyNow(){
     const price = document.getElementById("laptopPrice").innerText
     const laptopName = document.getElementById("laptopTitle").innerText
@@ -157,10 +154,9 @@ function pressBuyNow(){
     }else {
         alert("Unfortunately you dont have enough funds fot this beauty. Check cheaper options, or maybe work?")
     }
-
     refreshBankBalance();
 }
-
+//Purchase confirmation
 function confirmPurchase() {
     const price = document.getElementById("laptopPrice").innerText
     const laptopName = document.getElementById("laptopTitle").innerText
@@ -169,9 +165,7 @@ function confirmPurchase() {
     }
 }
 
-
-
-
+//creating empty array for API fetch
 let laptops = [];
 
 //fetching laptops via API
@@ -182,6 +176,7 @@ fetch("https://hickory-quilled-actress.glitch.me/computers")
 
 const addLaptopsToMenu = (laptops) =>{
     laptops.forEach(x => addLaptopToMenu(x));
+    //to get data in first load
     specsHandle(laptops[0])
     laptopTitleElement.innerText = laptops[0].title;
     laptopDescElement.innerText = laptops[0].description;
@@ -198,10 +193,9 @@ const addLaptopToMenu = (laptop) =>{
     laptopsElement.appendChild(laptopElement);
         
 }
-
+//for viewing matching values for selected laptop
 const handleLaptopMenuChange = e => {
     const selectedLaptop = laptops[e.target.selectedIndex];
-    //specsElement.innerText = selectedLaptop.specs;
     specsHandle(selectedLaptop);
     laptopTitleElement.innerText = selectedLaptop.title;
     laptopDescElement.innerText = selectedLaptop.description;
@@ -211,13 +205,14 @@ const handleLaptopMenuChange = e => {
 }
 //to get correct src to activeImageElement
 function addImage(x) {
+    //for broken path
     if (x.includes("5")){
         x = "assets/images/5.png"
     }
     activeImage.src = "https://hickory-quilled-actress.glitch.me/" + x;
     
 }
-
+//map spect to get them as list
 function specsHandle(selectedLaptop){
     let specs = "";
     selectedLaptop.specs.map(spec => {
