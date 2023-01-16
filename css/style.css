@@ -11,8 +11,9 @@
 .bank {
     float: left;
     display: inline-block;
-    background-color: lightgray;
+    background-color: whitesmoke;
     margin: 15px;
+    
 
     
 }
@@ -20,21 +21,38 @@
 .work {
     float: left;
     display: inline-block;
-    background-color: azure;
+    background-color: whitesmoke;
     margin: 15px;
+   
 }
 
 .laptopsView {
     float: left;
-    background-color: blanchedalmond;
+    background-color: whitesmoke;
     margin: 15px;
 }
 
 .buyNowView {
-    background-color: cornsilk;
+    background-color: whitesmoke;
 }
 
 img {
     height: 200px;
     width: 200px;
+}
+
+button {
+    background-color: yellow;
+    color: black;
+}
+
+.work-btn {
+    background-color: blue;
+    color: white;
+
+}
+
+.payLoan-btn {
+    background-color: palegreen;
+    color: black;
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,8 +24,8 @@
         <h2>Work</h2>
         <p name="workMoney" id="workMoney"></p>
         <button name="bankButton" id="bankButton">Bank</button>
-        <button name="workButton" id="workButton">Work</button>
-        <button name="payLoanButton" id="payLoanButton">Pay Loan</button>
+        <button name="workButton" id="workButton" class="work-btn">Work</button>
+        <button name="payLoanButton" id="payLoanButton" class="payLoan-btn">Pay Loan</button>
       </div>
 
       <div class="laptopsView">
@@ -33,6 +33,7 @@
         <select name="laptops" id="laptops">
            
         </select>
+        <h3>Features</h3>
         <ul id="specs" name="specs">
 
         
@@ -43,13 +44,14 @@
     </div>
 
       <div class="buyNowView">
+        <div id="laptopImage" name = "laptopImage">
+          <img id ="activeImage">
+        </div>
         <h2 id ="laptopTitle" name = "laptopTitle"></h2>
         
         <span id ="laptopDesc" name = "laptopDesc"></span>
         <h3 id = "laptopPrice" name = "laptopPrice"></h3>
-        <div id="laptopImage" name = "laptopImage">
-          <img id ="activeImage">
-        </div>
+        
         <button name="buyNowButton" id="BuyNowButton">Buy now</button>
       </div>
       <script src="app.js"></script>

@@ -17,16 +17,24 @@ const laptopPriceElement = document.getElementById("laptopPrice");
 //Creating a person with banking details
 let person = {
     name: "Joe Banker",
-    bankBalance: 2000,
+    bankBalance: 0,
     loan: 0,
-    workBalance: 100,
+    workBalance: 0,
 };
 
-
+function refreshLoanBalance(){
+    loanBalanceElement.innerText ="Loan " + person.loan + " €";  
+}
+function refreshWorkBalance(){
+    workBalanceElement.innerText ="Balance "  + person.workBalance + " €";   
+}
+function refreshBankBalance(){
+    bankBalanceElement.innerText ="Balance "  + person.bankBalance + " €";
+}
 //basic info showing 
 personElement.innerText = person.name;
-bankBalanceElement.innerText ="Balance "  + person.bankBalance + " €";
-workBalanceElement.innerText ="Balance "  + person.workBalance + " €";
+refreshBankBalance();
+refreshWorkBalance();
 //hiding Loan Button
 document.getElementById("payLoanButton").style.display = "none";
 
@@ -44,7 +52,8 @@ function pressloanButton(){
             person.loan = loanAsked;
             document.getElementById('loanBalance').style.display = "block";
             document.getElementById("payLoanButton").style.display = "block";
-            loanBalanceElement.innerText ="Loan " + person.loan + " €";       
+            refreshLoanBalance();
+            
         }else if (loanAsked === 0){
             alert("Asked loan was "  + loanAsked + "€. Loan not granted");
         } else {
@@ -66,13 +75,13 @@ function pressBankButton() {
     person.workBalance = 0
     console.log(person.bankBalance)
     bankBalanceElement.innerText ="Balance "  + person.bankBalance + " €";
-    workBalanceElement.innerText = person.workBalance
+    refreshWorkBalance();
     document.getElementById('loanBalance').style.display = "hidden";
 }else if (person.loan >0){
     person.bankBalance = person.bankBalance + (person.workBalance*0.9)
     person.loan= person.loan - (person.workBalance*0.1)
     person.workBalance = 0
-    loanBalanceElement.innerText ="Loan " + person.loan + " €" 
+    refreshLoanBalance();
     //for end of loan payment. Paying instant back if customer sends too much money.
     if (person.loan <0){
         const overpaidMoney = Math.abs(person.loan)
@@ -83,8 +92,8 @@ function pressBankButton() {
         document.getElementById("payLoanButton").style.display = "none";
 
     }
-    bankBalanceElement.innerText ="Balance "  + person.bankBalance + " €";
-    workBalanceElement.innerText = person.workBalance + " €";
+    refreshBankBalance();
+    refreshWorkBalance();
     
 
 }else if (person.loan <0)
@@ -98,7 +107,7 @@ document.getElementById("workButton").addEventListener("click", pressWork);
 function pressWork() {
     person.workBalance += 100
     console.log(person.workBalance)
-    workBalanceElement.innerText ="Balance "  + person.workBalance + " €";
+    refreshWorkBalance();
   }
 
 //Pay Loan directly
@@ -107,18 +116,22 @@ document.getElementById("payLoanButton").addEventListener("click", pressPayLoan)
 function pressPayLoan(){
     if (person.workBalance === 0){
         alert("You need work to pay your loan")
+        
 
     } else if (person.loan > 0){
         person.loan = person.loan - person.workBalance
         person.workBalance = 0 
-        loanBalanceElement.innerText ="Loan " + person.loan + " €" 
+        refreshLoanBalance();
+        if (person.loan === 0){
+            document.getElementById('loanBalance').style.display = "none";
+            document.getElementById("payLoanButton").style.display = "none";
+        }
     }
     
     checkLoanBalance()
 
-    bankBalanceElement.innerText ="Balance "  + person.bankBalance + " €";
-    workBalanceElement.innerText = person.workBalance + " €";
-
+    refreshBankBalance();
+    refreshWorkBalance();
 }
 
 function checkLoanBalance(){
@@ -131,6 +144,25 @@ function checkLoanBalance(){
         document.getElementById("payLoanButton").style.display = "none";
 }
 }
+
+
+document.getElementById("BuyNowButton").addEventListener("click", pressBuyNow);
+function pressBuyNow(){
+    const price = document.getElementById("laptopPrice").innerText
+    const laptopName = document.getElementById("laptopName")
+    if(person.bankBalance >= price){
+        person.bankBalance = person.bankBalance - price
+        alert("You just bought " + laptopName + "! Your Bank Balance is now " + person.bankBalance + "€. Receipt is in your email. ")
+    }else {
+        alert("Unfortunately you dont have enough funds fot this beauty. Check cheaper options, or maybe work?")
+    }
+
+    refreshBankBalance();
+}
+
+
+
+
 
 
 let laptops = [];
@@ -162,14 +194,14 @@ const addLaptopToMenu = (laptop) =>{
 
 const handleLaptopMenuChange = e => {
     const selectedLaptop = laptops[e.target.selectedIndex];
-    specsElement.innerText =selectedLaptop.specs;
+    specsElement.innerText = selectedLaptop.specs;
     laptopTitleElement.innerText = selectedLaptop.title;
     laptopDescElement.innerText = selectedLaptop.description;
     laptopPriceElement.innerText = selectedLaptop.price;
-    addImage(selectedLaptop.image)
+    addImage(selectedLaptop.image);
     
 }
-
+//to get correct src to activeImageElement
 function addImage(x) {
     if (x.includes("5")){
         x = "assets/images/5.png"
@@ -178,10 +210,7 @@ function addImage(x) {
     
 }
 
-function clearDiv(elementID)
-{
-    document.getElementById(elementID).innerHTML = "";
-}
+
 
 
 laptopsElement.addEventListener("change", handleLaptopMenuChange)
