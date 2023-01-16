@@ -175,7 +175,7 @@ fetch("https://hickory-quilled-actress.glitch.me/computers")
 
 const addLaptopsToMenu = (laptops) =>{
     laptops.forEach(x => addLaptopToMenu(x));
-    specsElement.innerText = laptops[0].specs;
+    specsHandle(laptops[0])
     laptopTitleElement.innerText = laptops[0].title;
     laptopDescElement.innerText = laptops[0].description;
     laptopPriceElement.innerText = laptops[0].price;
@@ -194,7 +194,8 @@ const addLaptopToMenu = (laptop) =>{
 
 const handleLaptopMenuChange = e => {
     const selectedLaptop = laptops[e.target.selectedIndex];
-    specsElement.innerText = selectedLaptop.specs;
+    //specsElement.innerText = selectedLaptop.specs;
+    specsHandle(selectedLaptop);
     laptopTitleElement.innerText = selectedLaptop.title;
     laptopDescElement.innerText = selectedLaptop.description;
     laptopPriceElement.innerText = selectedLaptop.price;
@@ -210,7 +211,13 @@ function addImage(x) {
     
 }
 
-
+function specsHandle(selectedLaptop){
+    let specs = "";
+    selectedLaptop.specs.map(spec => {
+        specs = specs + spec + "\n";
+    })
+    specsElement.innerText = specs;
+}
 
 
 laptopsElement.addEventListener("change", handleLaptopMenuChange)
