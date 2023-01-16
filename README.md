@@ -1,4 +1,5 @@
 # Assignment_1
+This is the first assignment in Noroff .NET Fullstack-course. 
 
 The goal of this project is build a dynamic webpage using “vanilla” JavaScript.
 
