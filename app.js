@@ -146,10 +146,11 @@ function checkLoanBalance(){
 }
 
 
-document.getElementById("BuyNowButton").addEventListener("click", pressBuyNow);
+document.getElementById("BuyNowButton").addEventListener("click", confirmPurchase);
 function pressBuyNow(){
     const price = document.getElementById("laptopPrice").innerText
-    const laptopName = document.getElementById("laptopName")
+    const laptopName = document.getElementById("laptopTitle").innerText
+    
     if(person.bankBalance >= price){
         person.bankBalance = person.bankBalance - price
         alert("You just bought " + laptopName + "! Your Bank Balance is now " + person.bankBalance + "€. Receipt is in your email. ")
@@ -160,7 +161,13 @@ function pressBuyNow(){
     refreshBankBalance();
 }
 
-
+function confirmPurchase() {
+    const price = document.getElementById("laptopPrice").innerText
+    const laptopName = document.getElementById("laptopTitle").innerText
+    if (confirm("Do you really want to buy " + laptopName+ " for " + price+ "€?" )) {
+        pressBuyNow();
+    }
+}
 
 
 
