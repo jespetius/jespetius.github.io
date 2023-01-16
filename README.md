@@ -26,6 +26,7 @@ Salary comes from Work-button, 100€ per click. Salary is used to pay off loan 
 
 ## API
 
-In this project API is used to get info about Computer Stores computers.
+In this project API is used to get info about Computer Stores laptops. API is founded at:
+https://hickory-quilled-actress.glitch.me/computers
 
 
