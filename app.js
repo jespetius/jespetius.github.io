@@ -31,10 +31,12 @@ function refreshWorkBalance(){
 function refreshBankBalance(){
     bankBalanceElement.innerText ="Balance "  + person.bankBalance + " €";
 }
+//Hiding loan  balance and Pay Loan Button when not needed
 function hideLoanInfo(){
     document.getElementById('loanBalance').style.display = "none";
         document.getElementById("payLoanButton").style.display = "none";
 }
+
 //basic info showing 
 personElement.innerText = person.name;
 refreshBankBalance();
@@ -212,7 +214,7 @@ function addImage(x) {
     activeImage.src = "https://hickory-quilled-actress.glitch.me/" + x;
     
 }
-//map spect to get them as list
+//map spects to get them as list
 function specsHandle(selectedLaptop){
     let specs = "";
     selectedLaptop.specs.map(spec => {
@@ -221,7 +223,7 @@ function specsHandle(selectedLaptop){
     specsElement.innerText = specs;
 }
 
-
+//Listener for event change in laptop dropdown
 laptopsElement.addEventListener("change", handleLaptopMenuChange)
 
 
