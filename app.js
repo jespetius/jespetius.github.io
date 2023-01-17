@@ -3,15 +3,9 @@ const personElement = document.getElementById("person");
 const bankBalanceElement = document.getElementById("bankBalance");
 const loanBalanceElement = document.getElementById("loanBalance");
 const workBalanceElement = document.getElementById("workMoney");
-const loanElement = document.getElementById("loanButton");
-const workElement = document.getElementById("workButton");
-const bankElement = document.getElementById("bankButton");
-const buyNowElement = document.getElementById("buyNowButton");
-const payLoanElement = document.getElementById("payLoanButton");
 const specsElement = document.getElementById("specs");
 const laptopTitleElement = document.getElementById("laptopTitle");
 const laptopDescElement = document.getElementById("laptopDesc");
-const laptopImageElement = document.getElementById("laptopImage");
 const activeImage = document.getElementById("activeImage");
 const laptopPriceElement = document.getElementById("laptopPrice");
 //Creating a person with banking details
@@ -42,7 +36,7 @@ personElement.innerText = person.name;
 refreshBankBalance();
 refreshWorkBalance();
 //hiding Loan Button
-document.getElementById("payLoanButton").style.display = "none";
+hideLoanInfo();
 
 
 //onclick loan
@@ -61,7 +55,7 @@ function pressloanButton(){
             refreshLoanBalance();
             
         }else if (loanAsked === 0){
-            alert("Asked loan was "  + loanAsked + "€. Loan not granted");
+            alert("Asked loan was "  + loanAsked + "€. Loan can not be " + loanAsked + "€." );
         } else {
             alert("Loan not granted!")
         }
@@ -72,6 +66,7 @@ function pressloanButton(){
 }
 //onclick work to Bank
 document.getElementById("bankButton").addEventListener("click", pressBankButton);
+
 function pressBankButton() {
     if (person.workBalance === 0){
         alert("You need to work to transfer money to bank")
