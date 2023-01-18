@@ -10,7 +10,6 @@
 
 .bank {
     float: left;
-    display: inline-block;
     background-color: whitesmoke;
     margin: 15px;
     
@@ -20,7 +19,6 @@
 
 .work {
     float: left;
-    display: inline-block;
     background-color: whitesmoke;
     margin: 15px;
    
@@ -44,6 +42,7 @@ img {
 button {
     background-color: yellow;
     color: black;
+    text-align: center;
 }
 
 .work-btn {

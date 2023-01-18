@@ -53,9 +53,10 @@ function pressloanButton(){
             document.getElementById('loanBalance').style.display = "block";
             document.getElementById("payLoanButton").style.display = "block";
             refreshLoanBalance();
-            
+        //dont give loan if 0 asked    
         }else if (loanAsked === 0){
             alert("Asked loan was "  + loanAsked + "€. Loan can not be " + loanAsked + "€." );
+        //input something else, dont give loan
         } else {
             alert("Loan not granted!")
         }
@@ -66,22 +67,24 @@ function pressloanButton(){
 }
 //onclick work to Bank
 document.getElementById("bankButton").addEventListener("click", pressBankButton);
-
+//pressing bankbutton
 function pressBankButton() {
+    //if no work money, alert user
     if (person.workBalance === 0){
         alert("You need to work to transfer money to bank")
-    
+    //checking loan status before deposit to bank
     }else if (person.loan === 0){
-    person.bankBalance = person.bankBalance + person.workBalance
-    person.workBalance = 0
-    refreshBankBalance();
-    refreshWorkBalance();
-    document.getElementById('loanBalance').style.display = "hidden";
-}else if (person.loan >0){
-    person.bankBalance = person.bankBalance + (person.workBalance*0.9)
-    person.loan= person.loan - (person.workBalance*0.1)
-    person.workBalance = 0
-    refreshLoanBalance();
+        person.bankBalance = person.bankBalance + person.workBalance
+        person.workBalance = 0
+        refreshBankBalance();
+        refreshWorkBalance();
+        document.getElementById('loanBalance').style.display = "hidden";
+    //if loan active, pay off loan
+    }else if (person.loan >0){
+        person.bankBalance = person.bankBalance + (person.workBalance*0.9)
+        person.loan= person.loan - (person.workBalance*0.1)
+        person.workBalance = 0
+        refreshLoanBalance();
     //for end of loan payment. Paying instant back if customer sends too much money.
     if (person.loan <0){
         const overpaidMoney = Math.abs(person.loan)
@@ -107,13 +110,14 @@ function pressWork() {
     refreshWorkBalance();
   }
 
-//Pay Loan directly
+//Pay Loan directly listener
 document.getElementById("payLoanButton").addEventListener("click", pressPayLoan);
+//Press Pay Loan Button
 function pressPayLoan(){
     if (person.workBalance === 0){
         alert("You need work to pay your loan")
         
-
+    //checking that there is loan
     } else if (person.loan > 0){
         person.loan = person.loan - person.workBalance
         person.workBalance = 0 
@@ -127,7 +131,7 @@ function pressPayLoan(){
     refreshBankBalance();
     refreshWorkBalance();
 }
-
+//checking overpaid loan and give it back
 function checkLoanBalance(){
     if (person.loan <0){
         const overpaidMoney = Math.abs(person.loan)
@@ -153,10 +157,11 @@ function pressBuyNow(){
     }
     refreshBankBalance();
 }
-//Purchase confirmation
+//Press Buy Now button and Purchase confirmation
 function confirmPurchase() {
     const price = document.getElementById("laptopPrice").innerText
     const laptopName = document.getElementById("laptopTitle").innerText
+    //if user confirms, start purchase prosess
     if (confirm("Do you really want to buy " + laptopName+ " for " + price+ "€?" )) {
         pressBuyNow();
     }
