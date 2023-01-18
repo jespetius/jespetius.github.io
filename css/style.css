@@ -2,6 +2,7 @@
     background-color: black;
     font-variant-caps: all-petite-caps;
     color: white;
+    
 }
 
 .upper-part {
@@ -12,27 +13,42 @@
     float: left;
     background-color: whitesmoke;
     margin: 15px;
-    
-
-    
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid gainsboro;
 }
 
 .work {
     float: left;
     background-color: whitesmoke;
     margin: 15px;
-   
+    height:fit-content;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid gainsboro;
 }
 
 .laptopsView {
     float: left;
     background-color: whitesmoke;
     margin: 15px;
+    padding: 15px;
+    height: fit-content;
+    border-radius: 12px;
+    border: 1px solid gainsboro;
 }
 
 .buyNowView {
     background-color: whitesmoke;
+    margin: 15px;
+    padding: 15px;
+    height: fit-content;
+    width:max-content;
+    border-radius: 12px;
+    border: 1px solid gainsboro;
 }
+
+
 
 img {
     height: 200px;
@@ -43,15 +59,21 @@ button {
     background-color: yellow;
     color: black;
     text-align: center;
+    border-radius: 4px;
+    border: 1px solid black;
 }
 
 .work-btn {
     background-color: blue;
     color: white;
+    border-radius: 4px;
+    border: 1px solid black;
 
 }
 
 .payLoan-btn {
     background-color: palegreen;
     color: black;
+    border-radius: 4px;
+    border: 1px solid black;
 }
